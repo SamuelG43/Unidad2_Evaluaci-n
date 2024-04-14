@@ -21,19 +21,32 @@ Funcionamiento del Programa
 
 ## Diagrama de estados:
 
-
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20163647.png)
 
 
 ## Codigo de arduino:
-Declaracion de Variables: 
+Declaracion de Variables:
+
+![git](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20163721.png)
+
+
 Para todas las variables, se declaran variables para manipular su valor inicial, su 
 temperatura y una variable de tipo booleano que permita su activación y desactivación
+
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20163749.png)
+
+
 Mediante una máquina de estados en el estado de configuración, se permite habilitar y 
 deshabilitar la variable, así como cambiar su valor inicial y su velocidad utilizando la 
 entrada de teclado.
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20163814.png)
+
+
 Al presionar la tecla J, una vez que toda la configuración haya sido establecida, se avanza 
 al siguiente estado de la máquina llamado 'OxigenoProceso', donde se llevará a cabo toda 
 la lógica para disminuir las variables.
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20163830.png)
+
 Mediante el uso de variables temporales establecidas por millis (que cumplen la función 
 de una espera de 1000 milisegundos sin tener que recurrir a la función delay, ya que podría 
 causar bloqueos en el programa), se disminuye el valor de 
@@ -41,15 +54,29 @@ oxígeno/refrigeración/temperatura en el valor escogido en velocidad de consumo
 Posteriormente, se imprimen/almacenan en el buffer, precedidos por una etiqueta 
 distintiva como "B", "M" o "N", que servirá para identificar la variable desde el código de 
 Unity
+
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20163847.png)
+
+
 Si las 3 variables llegan a cero, entonces la máquina de estados pasa a su estado final, 
 donde todos los valores se restablecen.
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20163911.png)
+
 CODIGO DE UNITY
 Una vez que el código de Arduino esté programado, solo es necesario crear un programa 
 en Unity para enviar datos al microcontrolador, recibir nuevos datos y convertirlos a 
 valores numéricos. Esto se debe a que lo que se almacena en el buffer son impresiones de 
 cadenas de texto, por lo que es necesario convertirlas para poder manipularlas en Unity.
+
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20163911.png)
+
+
 En esta parte del código, declaramos variables de tipo entero que serán las encargadas de 
 almacenar, en Unity, los valores traídos desde la placa de Arduino.
+
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20163944.png)
+
+
 Se envía mediante un arreglo de bytes el valor hexadecimal 0x48, que representa la letra 
 que desencadena el evento en Arduino. Este valor hexadecimal se envía a la placa 
 mediante la instrucción Serial.Write. Posteriormente, se recupera lo almacenado en el 
@@ -57,11 +84,24 @@ buffer utilizando Serial.Read. Sin embargo, para un manejo más fácil de lo rec
 reenvía a una variable de tipo entero. Esta variable podrá ser manipulada en Unity. 
 (Obsérvese la instrucción 'Out OxygenRate', donde 'OxygenRate' representa la variable de 
 tipo entero hacia la que se redirige lo recibido en el buffer). Además, de este modo, el 
-buffer podrá estar vacío cuando necesite recibir otra instrucción
+buffer podrá estar vacío cuando necesite recibir otra instrucción.
+
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20163958.png)
+
 Función en Unity que envía, mediante hexadecimales, la letra 'J', la cual en el código de 
 Arduino ejecuta el cambio de estado de la máquina a 'OxigenoProceso' o 'Jugar'.
+
+
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20164015.png)
+
+
+
 Dentro de la función Update, se reciben los valores enviados desde Arduino en este 
 segmento:
+
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20164027.png)
+
+
 Como se mencionó anteriormente, las letras antes de cada valor servirán para identificar a 
 qué variable se deben dirigir los datos del búfer. Esto se realiza mediante casos, y a través 
 de un arreglo se separa el primer carácter recibido (la letra/etiqueta) del resto de 
@@ -70,10 +110,20 @@ Posteriormente en Unity se revisa si el jugador introdujo una contraseña en un 
 de UI de tipo InputField, si es incorrecto no pasara nada, si es correcto entonces el jugador 
 ganara.
 
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20164039.png)
+
 
 ## Construccion de la interfaz grafica
 Para representar la velocidad en la que las variables deben cambiar
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20164054.png)
+
 Para aumentar o disminuir distintas variables
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20164103.png)
+
 Como objeto principal en la interfaz, aunque sin funcionalidad aporta a la narrativa y 
 ambientacion de una central nuclear
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20164114.png)
+
+
 Objeto Grafico para Representar la refrigeracion, el oxigeno y la temperatura
+![git ](https://github.com/SamuelG43/Unidad2_Evaluaci-n/blob/main/Imagenes%20github%20unidad%202/Captura%20de%20pantalla%202024-04-14%20164127.png)
